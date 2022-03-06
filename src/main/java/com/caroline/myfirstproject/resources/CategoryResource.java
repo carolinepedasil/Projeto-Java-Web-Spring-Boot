@@ -16,7 +16,7 @@ import com.caroline.myfirstproject.repositories.CategoryRepository;
 @RequestMapping(value = "/categories") //define o caminho por qual esse recurso vai responser, ou seja: /categories
 public class CategoryResource {
 	
-	@Autowired // resolve a dependância - vai obter uma instância do categoryRepository que está na depedência da classe - Para o @Autowired funcionar precisa do @Component
+	@Autowired // resolve a dependência - vai obter uma instância do categoryRepository que está na depedência da classe - Para o @Autowired funcionar precisa do @Component
 	private CategoryRepository categoryRepository;
 
 	@GetMapping
@@ -27,7 +27,7 @@ public class CategoryResource {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Category> findById(@PathVariable Long id) { //@PathVariable vai reconhecer o id /1 do caminho no Postman
-		Category cat = categoryRepository.findById(id);
+		Category cat = categoryRepository.findById(id).get(); //.get() vai obter o objeto que está dentro do Optional
 		return ResponseEntity.ok().body(cat);
 	}
 }
